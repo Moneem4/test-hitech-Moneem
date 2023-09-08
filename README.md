@@ -79,8 +79,6 @@ url/movie/updateMovie/{id}
 url/movie/deleteMovie/{id}
 
 
-```
-
 ### Genre Endpoints
 
 ```
@@ -111,16 +109,18 @@ url/genre/update/:id
 }
 ```
 
-```
 ##Delete Genre By ID @DELETE
 url/genre/deleteGenre/{id}
-###########
-#TEST
+
+```
+###  TEST
 #Set up Swagger
 Swagger is a tool to document your API using the OpenAPI specification. Nest has a dedicated module for Swagger, which you will be using shortly.
 
 Get started by installing the required dependencies:
 
 npm install --save @nestjs/swagger swagger-ui-express
+
 While the application is running, open your browser and navigate to http://localhost:3000/api. You should see the Swagger UI.
+
 #N.B : All the endpoint of movies and genres are authentificated so please first , register a user , login ,take the token provided and put it in the "authorise" section on top of page in the url
