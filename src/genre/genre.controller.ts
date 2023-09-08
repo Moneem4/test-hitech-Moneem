@@ -76,8 +76,8 @@ import {
     async remove(@Res() res,@Param('id', ParseIntPipe) id: number): Promise<Genre> {
       try {
         var movie= await this.genreService.findOne(id);
-        if(!movie) {res.status(HttpStatus.NOT_FOUND).json({
-         message: "Movie not found,check id !",
+        if(!movie) {return res.status(HttpStatus.NOT_FOUND).json({
+         message: "Genre not found,check id !",
      })}
      return await this.genreService.remove(id);
       } catch (error) {

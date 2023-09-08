@@ -62,8 +62,8 @@ let GenreController = class GenreController {
         try {
             var movie = await this.genreService.findOne(id);
             if (!movie) {
-                res.status(common_1.HttpStatus.NOT_FOUND).json({
-                    message: "Movie not found,check id !",
+                return res.status(common_1.HttpStatus.NOT_FOUND).json({
+                    message: "Genre not found,check id !",
                 });
             }
             return await this.genreService.remove(id);

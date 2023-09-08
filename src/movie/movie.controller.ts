@@ -122,7 +122,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
     async remove(@Res() res,@Param('id', ParseIntPipe) id: number): Promise<Movie> {
       try {
         var movie= await this.movieService.findOne(id);
-       if(!movie) {res.status(HttpStatus.NOT_FOUND).json({
+       if(!movie) {return res.status(HttpStatus.NOT_FOUND).json({
         message: "Movie not found,check id !",
     })}
         return await this.movieService.remove(id);  

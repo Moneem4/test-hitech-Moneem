@@ -83,7 +83,7 @@ let MovieController = class MovieController {
         try {
             var movie = await this.movieService.findOne(id);
             if (!movie) {
-                res.status(common_1.HttpStatus.NOT_FOUND).json({
+                return res.status(common_1.HttpStatus.NOT_FOUND).json({
                     message: "Movie not found,check id !",
                 });
             }
