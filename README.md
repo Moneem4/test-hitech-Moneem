@@ -1,7 +1,7 @@
 
 # Nest Movies API
 
-A simple movies API built with NestJS . It serves movies with genres and staff, persisting data using PostgreSQL.
+A simple movies API built with NestJS . It serves movies with genres , persisting data using PostgreSQL.
 
 
 ## Installation
