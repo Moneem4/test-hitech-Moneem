@@ -105,7 +105,7 @@ url/genre/update/:id
 
 #Example
 {
-	"name": 1
+	"name":"Humour" 
 }
 ```
 
