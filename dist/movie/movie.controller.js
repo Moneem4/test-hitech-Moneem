@@ -27,7 +27,7 @@ let MovieController = class MovieController {
             return await this.movieService.findAll();
         }
         catch (error) {
-            res.status(500).json({
+            return res.status(500).json({
                 message: error,
             });
         }
