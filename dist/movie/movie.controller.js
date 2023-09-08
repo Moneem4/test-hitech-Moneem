@@ -22,8 +22,15 @@ let MovieController = class MovieController {
     constructor(movieService) {
         this.movieService = movieService;
     }
-    async findAll() {
-        return await this.movieService.findAll();
+    async findAll(res) {
+        try {
+            return await this.movieService.findAll();
+        }
+        catch (error) {
+            res.status(500).json({
+                message: error,
+            });
+        }
     }
     async findOne(res, id) {
         try {
@@ -97,8 +104,9 @@ __decorate([
     (0, common_1.UsePipes)(common_1.ValidationPipe),
     (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.Get)('/listMovie'),
+    __param(0, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], MovieController.prototype, "findAll", null);
 __decorate([

@@ -31,8 +31,15 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
     @UsePipes(ValidationPipe)
     @ApiBearerAuth()
     @Get('/listMovie')
-    async findAll(): Promise<Movie[]> {
-      return await this.movieService.findAll();
+    async findAll(@Res() res): Promise<Movie[]> {
+      try {
+        return await this.movieService.findAll();
+      } catch (error) {
+        res.status(500).json({
+          message: error,
+      })    
+      }
+     
     }
     @UseGuards(JwtAuthGuard)
     @ApiSecurity('access-key')

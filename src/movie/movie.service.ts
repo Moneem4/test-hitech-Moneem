@@ -30,14 +30,18 @@ export class MovieService {
   
   }
   async findAll(): Promise<Movie[]> {
-    return await this.prisma.movie.findMany({});
+    return await this.prisma.movie.findMany({include: {
+      genres:true
+    },});
   }
 
   async findOne(id: number): Promise<Movie> {
     return await this.prisma.movie.findUnique({
       where: {
         id: id,
-      }
+      },include: {
+        genres:true
+      },
     });
   }
 

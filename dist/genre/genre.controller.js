@@ -20,49 +20,95 @@ let GenreController = class GenreController {
     constructor(genreService) {
         this.genreService = genreService;
     }
-    async findAll() {
-        return await this.genreService.findAll();
+    async findAll(res) {
+        try {
+            return await this.genreService.findAll();
+        }
+        catch (error) {
+            res.status(500).json({
+                message: error,
+            });
+        }
     }
-    async findOne(id) {
-        return await this.genreService.findOne(id);
+    async findOne(res, id) {
+        try {
+            var genre = await this.genreService.findOne(id);
+            return (genre) ?
+                res.status(common_1.HttpStatus.OK).json({
+                    message: "Success",
+                    genre: genre
+                })
+                : res.status(common_1.HttpStatus.NOT_FOUND).json({
+                    message: "Genre not found,check id !",
+                });
+        }
+        catch (error) {
+            res.status(500).json({
+                message: error,
+            });
+        }
     }
-    async create(createGenreDto) {
-        return await this.genreService.create(createGenreDto);
+    async create(res, createGenreDto) {
+        try {
+            return await this.genreService.create(createGenreDto);
+        }
+        catch (error) {
+            res.status(500).json({
+                message: error,
+            });
+        }
     }
-    async remove(id) {
-        return await this.genreService.remove(id);
+    async remove(res, id) {
+        try {
+            var movie = await this.genreService.findOne(id);
+            if (!movie) {
+                res.status(common_1.HttpStatus.NOT_FOUND).json({
+                    message: "Movie not found,check id !",
+                });
+            }
+            return await this.genreService.remove(id);
+        }
+        catch (error) {
+            res.status(500).json({
+                message: error,
+            });
+        }
     }
 };
 exports.GenreController = GenreController;
 __decorate([
     (0, common_1.Get)('/listGenre'),
     (0, common_1.UsePipes)(common_1.ValidationPipe),
+    __param(0, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], GenreController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)('/oneGenre/:id'),
     (0, common_1.UsePipes)(common_1.ValidationPipe),
-    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [Object, Number]),
     __metadata("design:returntype", Promise)
 ], GenreController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Post)('/createGenre'),
     (0, common_1.UsePipes)(common_1.ValidationPipe),
-    __param(0, (0, common_1.Body)()),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_genre_dto_1.CreateGenreDto]),
+    __metadata("design:paramtypes", [Object, create_genre_dto_1.CreateGenreDto]),
     __metadata("design:returntype", Promise)
 ], GenreController.prototype, "create", null);
 __decorate([
     (0, common_1.Delete)('/deleteGenre/:id'),
     (0, common_1.UsePipes)(common_1.ValidationPipe),
-    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [Object, Number]),
     __metadata("design:returntype", Promise)
 ], GenreController.prototype, "remove", null);
 exports.GenreController = GenreController = __decorate([

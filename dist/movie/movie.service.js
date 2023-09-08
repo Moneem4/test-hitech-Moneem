@@ -36,13 +36,17 @@ let MovieService = class MovieService {
         });
     }
     async findAll() {
-        return await this.prisma.movie.findMany({});
+        return await this.prisma.movie.findMany({ include: {
+                genres: true
+            }, });
     }
     async findOne(id) {
         return await this.prisma.movie.findUnique({
             where: {
                 id: id,
-            }
+            }, include: {
+                genres: true
+            },
         });
     }
     async update(id, data) {

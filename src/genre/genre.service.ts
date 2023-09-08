@@ -32,15 +32,8 @@ export class GenreService {
     return await this.prisma.genre.create({ data });
   }
 
-  
-
   async remove(id: number): Promise<Genre> {
-    var genre= await this.prisma.genre.findUnique({
-      where: {
-        id: id,
-      },
-    });
-  
+   
     return await this.prisma.genre.delete({
       where: { id: id },
       
