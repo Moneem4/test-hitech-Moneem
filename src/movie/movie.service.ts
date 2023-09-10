@@ -2,6 +2,7 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Movie, Prisma } from '.prisma/client';
 import { CreateMovieDto, UpdateMovieDto } from './dto/movie.dto';
+import { title } from 'process';
 
 
 @Injectable()
@@ -69,7 +70,19 @@ export class MovieService {
       },
     });
   }
+//search movie 
+async searchMovie(data:string): Promise<Movie[]> {
+ 
+  return await this.prisma.movie.findMany({
+    where: {
+    title: data
+    },
+    include: {
+      genres:true
+    },
+  });
 
+}
 
   
 }

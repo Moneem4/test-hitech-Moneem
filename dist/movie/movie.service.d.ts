@@ -9,4 +9,5 @@ export declare class MovieService {
     findOne(id: number): Promise<Movie>;
     update(id: number, data: UpdateMovieDto): Promise<Movie>;
     remove(id: number): Promise<Movie>;
+    searchMovie(data: string): Promise<Movie[]>;
 }

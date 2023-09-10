@@ -72,6 +72,16 @@ let MovieService = class MovieService {
             },
         });
     }
+    async searchMovie(data) {
+        return await this.prisma.movie.findMany({
+            where: {
+                title: data
+            },
+            include: {
+                genres: true
+            },
+        });
+    }
 };
 exports.MovieService = MovieService;
 exports.MovieService = MovieService = __decorate([

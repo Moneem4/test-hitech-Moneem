@@ -95,6 +95,24 @@ let MovieController = class MovieController {
             });
         }
     }
+    async finsearchMoviedOne(res, data) {
+        try {
+            var movies = await this.movieService.searchMovie(data);
+            return (movies) ?
+                res.status(common_1.HttpStatus.OK).json({
+                    message: "Success",
+                    movie: movies
+                })
+                : res.status(common_1.HttpStatus.NOT_FOUND).json({
+                    message: "no movie founded !",
+                });
+        }
+        catch (error) {
+            res.status(500).json({
+                message: error,
+            });
+        }
+    }
 };
 exports.MovieController = MovieController;
 __decorate([
@@ -162,6 +180,19 @@ __decorate([
     __metadata("design:paramtypes", [Object, Number]),
     __metadata("design:returntype", Promise)
 ], MovieController.prototype, "remove", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, swagger_1.ApiSecurity)('access-key'),
+    (0, common_1.UseInterceptors)(common_1.ClassSerializerInterceptor),
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UsePipes)(common_1.ValidationPipe),
+    (0, common_1.Get)('/searchMovie/'),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:returntype", Promise)
+], MovieController.prototype, "finsearchMoviedOne", null);
 exports.MovieController = MovieController = __decorate([
     (0, common_1.Controller)('movie'),
     __metadata("design:paramtypes", [movie_service_1.MovieService])

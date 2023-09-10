@@ -133,5 +133,30 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
       }
      
     }
+    @UseGuards(JwtAuthGuard)
+    @ApiSecurity('access-key')
+    @UseInterceptors(ClassSerializerInterceptor)
+    @ApiBearerAuth()
+    @UsePipes(ValidationPipe)
+    @Get('/searchMovie/')
+  
+    async finsearchMoviedOne(@Res() res,@Body()data:string): Promise<Movie> {
+     try {
+      var movies= await this.movieService.searchMovie(data);
+      return  (movies)?
+          res.status(HttpStatus.OK).json({
+          message: "Success",
+          movie:movies
+      })
+      :   res.status(HttpStatus.NOT_FOUND).json({
+        message: "no movie founded !",
+    })
+    
+  } catch (error) {
+    res.status(500).json({
+      message: error,
+  })
+   } 
+    }
   }
   

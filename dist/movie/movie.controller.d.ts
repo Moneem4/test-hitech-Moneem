@@ -9,4 +9,5 @@ export declare class MovieController {
     create(res: any, createMovieDto: CreateMovieDto): Promise<Movie>;
     update(res: any, id: number, updateMovieDto: UpdateMovieDto): Promise<Movie>;
     remove(res: any, id: number): Promise<Movie>;
+    finsearchMoviedOne(res: any, data: string): Promise<Movie>;
 }
